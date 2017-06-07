@@ -7,5 +7,12 @@
   </div>
   <div class="card-content white-text">
     <%= task.content %>
+    <% if task.state == 'wip' %> <%= link_to "<i class ='fa fa-arrow-left'></i>".html_safe, change_task_path(task, state: "open"), method: :put, class:"btn red", style: "width:45%;" %><%= link_to "<i class ='fa fa-arrow-right'></i>".html_safe, change_task_path(task, state: "closed"), method: :put, class:"btn right", style: "width:45%;"  %>
+
+<% elsif task.state == 'closed' %>
+      <%= link_to "<i class ='fa fa-arrow-left'></i>".html_safe, change_task_path(task, state: "wip"), method: :put, class:"btn btn-block red" %>
+    <% else %>
+      <%= link_to "<i class ='fa fa-arrow-right'></i>".html_safe, change_task_path(task, state: "wip"), method: :put, class:"btn btn-block"  %>
+    <% end %>
    </div>
  </div>
